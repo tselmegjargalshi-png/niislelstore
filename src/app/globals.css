@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+/*
+ * Нийслэл Стор: дизайн систем.
+ * Брэндийн өнгө: Шөнийн хөх (ink), Зосон улаан (accent), Алтан шаргал (gold), Зааны яс (ivory).
+ * Бүх өнгийг токеноор тодорхойлно, компонент дотор hex бичихгүй.
+ */
+:root {
+  --ink: #13203a;
+  --ink-soft: #2a3858;
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --surface-2: #f3eee6;
+  --surface-3: #ebe4d8;
+  --line: #e4ddcf;
+  --line-strong: #cfc5b2;
+  --text: #17130f;
+  --text-2: #5a5247;
+  --text-3: #877d6e;
+  --accent: #a5482e;
+  --accent-hover: #8c3a22;
+  --accent-soft: #f6e6df;
+  --gold: #b8924a;
+  --gold-soft: #f4ead2;
+  --on-ink: #faf7f2;
+  --on-accent: #ffffff;
+  --success: #17703f;
+  --success-soft: #e6f4ec;
+  --warn: #9a5b0b;
+  --warn-soft: #fdf1dc;
+  --danger: #b3261e;
+  --danger-soft: #fceae8;
+  --info: #1f4fa3;
+  --info-soft: #e8effb;
+  --shadow-sm: 0 1px 2px rgb(19 32 58 / 0.06), 0 1px 3px rgb(19 32 58 / 0.05);
+  --shadow-md: 0 8px 24px -8px rgb(19 32 58 / 0.18);
+  --shadow-lg: 0 24px 60px -20px rgb(19 32 58 / 0.32);
+  --radius: 14px;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --ink: #0d1424;
+  --ink-soft: #1b2744;
+  --bg: #0e0f13;
+  --surface: #16181e;
+  --surface-2: #1d2027;
+  --surface-3: #262a33;
+  --line: #2b2f39;
+  --line-strong: #3d4350;
+  --text: #f2eee7;
+  --text-2: #b9b2a5;
+  --text-3: #8b8578;
+  --accent: #e0775a;
+  --accent-hover: #ec8d72;
+  --accent-soft: #3a211a;
+  --gold: #d6b06a;
+  --gold-soft: #2f2716;
+  --on-ink: #faf7f2;
+  --on-accent: #1a0c07;
+  --success: #5cd392;
+  --success-soft: #11291b;
+  --warn: #f3b75a;
+  --warn-soft: #2e2210;
+  --danger: #ff8a80;
+  --danger-soft: #34171a;
+  --info: #8db4ff;
+  --info-soft: #14203a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss03";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+}
+h1, h2, h3, .display { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.12; text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.container-x { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 16px; }
+@media (min-width: 768px) { .container-x { padding-inline: 32px; } }
+
+/* Товчнууд */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 20px; border-radius: 999px; font-weight: 600; font-size: 0.95rem;
+  border: 1px solid transparent; cursor: pointer; transition: transform .15s, background .2s, border-color .2s, box-shadow .2s;
+  white-space: nowrap; user-select: none;
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.btn-primary { background: var(--ink); color: var(--on-ink); }
+.btn-primary:hover:not(:disabled) { background: var(--ink-soft); box-shadow: var(--shadow-md); }
+:root[data-theme="dark"] .btn-primary { background: var(--text); color: var(--bg); }
+.btn-accent { background: var(--accent); color: var(--on-accent); }
+.btn-accent:hover:not(:disabled) { background: var(--accent-hover); box-shadow: var(--shadow-md); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--line-strong); }
+.btn-ghost:hover:not(:disabled) { background: var(--surface-2); }
+.btn-danger { background: var(--danger-soft); color: var(--danger); border-color: transparent; }
+.btn-danger:hover:not(:disabled) { background: var(--danger); color: #fff; }
+.btn-sm { min-height: 36px; padding: 0 14px; font-size: 0.85rem; }
+.btn-block { width: 100%; }
+
+/* Талбарууд */
+.field { display: grid; gap: 6px; }
+.field > label, .label { font-size: 0.82rem; font-weight: 600; color: var(--text-2); }
+.input, .select, .textarea {
+  width: 100%; min-height: 46px; padding: 10px 14px; border-radius: 12px; background: var(--surface);
+  border: 1px solid var(--line-strong); color: var(--text); font-size: 1rem; transition: border-color .2s, box-shadow .2s;
+}
+.textarea { min-height: 96px; resize: vertical; }
+.input::placeholder, .textarea::placeholder { color: var(--text-3); }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.input[aria-invalid="true"], .select[aria-invalid="true"] { border-color: var(--danger); }
+.field-error { color: var(--danger); font-size: 0.8rem; font-weight: 500; }
+.field-hint { color: var(--text-3); font-size: 0.8rem; }
+
+/* Карт, хаяг */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; letter-spacing: .02em; }
+.badge-accent { background: var(--accent); color: var(--on-accent); }
+.badge-ink { background: var(--ink); color: var(--on-ink); }
+.badge-gold { background: var(--gold-soft); color: var(--gold); }
+.badge-success { background: var(--success-soft); color: var(--success); }
+.badge-warn { background: var(--warn-soft); color: var(--warn); }
+.badge-danger { background: var(--danger-soft); color: var(--danger); }
+.badge-info { background: var(--info-soft); color: var(--info); }
+.badge-muted { background: var(--surface-3); color: var(--text-2); }
+
+.eyebrow { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.skeleton { background: linear-gradient(90deg, var(--surface-2), var(--surface-3), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 10px; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* Хөдөлгөөн */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0; } 70% { transform: scale(1.08); } 100% { transform: scale(1); opacity: 1; } }
+@keyframes slide-in { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes toast-in { from { opacity: 0; transform: translateY(12px) scale(.96); } to { opacity: 1; transform: none; } }
+.anim-rise { animation: rise .55s cubic-bezier(.2,.7,.2,1) both; }
+.anim-pop { animation: pop .4s cubic-bezier(.2,.9,.3,1.3) both; }
+.product-card .art { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.product-card:hover .art { transform: scale(1.05); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.tabular { font-variant-numeric: tabular-nums; }
